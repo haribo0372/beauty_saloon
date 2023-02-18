@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS one_to_many_offices_and_services;
+DROP TABLE IF EXISTS one_to_many_offices_and_services; /* блок удаления таблиц , если они существуют в БД*/
 DROP TABLE IF EXISTS one_to_many_offices_and_staff;
 DROP TABLE IF EXISTS offices;
 DROP TABLE IF EXISTS staff;
@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS business_partners;
 
 
 
-CREATE TABLE services
+CREATE TABLE services                                   /*создание таблицы №1*/
 (
     services_id integer PRIMARY KEY,
     name_services text NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE services
     aver_price_₽ integer NOT NULL
 );
 
-INSERT INTO services VALUES (001, 'haircut' , '00:45' , 1199);
+INSERT INTO services VALUES (001, 'haircut' , '00:45' , 1199);          /*заполнение таблицы №1*/
 INSERT INTO services VALUES (002, 'styling' , '00:30' , 799);
 INSERT INTO services VALUES (003, 'hair_coloring' , '01:30' , 1499);
 INSERT INTO services VALUES (004, 'massage' , '01:00' , 3499);
@@ -26,7 +26,7 @@ INSERT INTO services VALUES (008, 'solarium' , '01:00' , 2499);
 INSERT INTO services VALUES (009, 'peeling' ,'01:00' , 1499);
 INSERT INTO services VALUES (010, 'permament_makeup' , '01:00' , 1199);
 
-CREATE TABLE staff
+CREATE TABLE staff                                           /*создание таблицы №2*/
 (
     id_worker int PRIMARY KEY,
     fl_name text NOT NULL,
@@ -38,7 +38,7 @@ CREATE TABLE staff
 );
 
 
-INSERT INTO staff VALUES (01 , 'Viktoria Nalevayka' , 'Koshkin Dom , 24' , 27 , 'barber' , 25000 , 001);
+INSERT INTO staff VALUES (01 , 'Viktoria Nalevayka' , 'Koshkin Dom , 24' , 27 , 'barber' , 25000 , 001);        /*заполнение таблицы №2*/
 INSERT INTO staff VALUES (02 , 'Grigoriy Otlevayka' , 'Shishkin Les , 35', 31 , 'barber' , 30000 , 002);
 INSERT INTO staff VALUES (03 , 'Patrik' , 'Bikini Bottom , 1', 19 , 'barber' , 30000 , 003);
 INSERT INTO staff VALUES (04 , 'Vadim Trumin' , 'Frosh pereulok , 20', 24 , 'barber' , 30000 , 001);
@@ -54,26 +54,26 @@ INSERT INTO staff VALUES (13 , 'Nurik Armani' , 'Krasnoormeyskaya , 11' , 41  , 
 INSERT INTO staff VALUES (14 , 'Polina Dromena' , 'Krasnoormeyskaya , 17' , 31 , 'permament_makeup_master' , 24000 , 010);
 
 
-CREATE TABLE offices 
+CREATE TABLE offices                                                                    /*создание таблицы №3*/
 (
     id_offices int PRIMARY KEY,
     office_adress text NOT NULL,
     aver_profit_₽_per_year money NOT NULL
 );
 
-INSERT INTO offices VALUES (11, 'Gromova street , 13' , 7896500);
+INSERT INTO offices VALUES (11, 'Gromova street , 13' , 7896500);                       /*заполнение таблицы №3*/
 INSERT INTO offices VALUES (22, 'Ignatievskoe highway , 10/3' , 1860500);
 INSERT INTO offices VALUES (33, 'Red light street , 3' , 5890435);
 
 
-CREATE TABLE one_to_many_offices_and_services
+CREATE TABLE one_to_many_offices_and_services                                            /*создание таблицы №4*/
 (
 	fk_id_office int REFERENCES offices(id_offices) NOT NULL,
 	fk_id_services int REFERENCES services(services_id) NOT NULL
 );
 
 
-INSERT INTO one_to_many_offices_and_services VALUES (11 , 1);
+INSERT INTO one_to_many_offices_and_services VALUES (11 , 1);                           /*заполнение таблицы №4*/
 INSERT INTO one_to_many_offices_and_services VALUES (11 , 2);
 INSERT INTO one_to_many_offices_and_services VALUES (11 , 3);
 INSERT INTO one_to_many_offices_and_services VALUES (11 , 4);
@@ -96,13 +96,13 @@ INSERT INTO one_to_many_offices_and_services VALUES (33 , 7);
 
 
 
-CREATE TABLE one_to_many_offices_and_staff
+CREATE TABLE one_to_many_offices_and_staff                              /*создание таблицы №5*/
 (
 	fk_id_office int REFERENCES offices(id_offices) NOT NULL,
 	fk_id_staff int REFERENCES staff(id_worker) NOT NULL
 );
 
-INSERT INTO one_to_many_offices_and_staff VALUES (11 , 1);
+INSERT INTO one_to_many_offices_and_staff VALUES (11 , 1);              /*заполнение таблицы №5*/
 INSERT INTO one_to_many_offices_and_staff VALUES (11 , 2);
 INSERT INTO one_to_many_offices_and_staff VALUES (11 , 3);
 INSERT INTO one_to_many_offices_and_staff VALUES (11 , 4);
@@ -137,14 +137,14 @@ INSERT INTO one_to_many_offices_and_staff VALUES (33 , 12);
 
 
 
-CREATE TABLE business_partners
+CREATE TABLE business_partners                                          /*создание таблицы №6*/
 (
 	id_partners int PRIMARY KEY,
 	nickname  text NOT NULL, 
 	financing_per_year money NOT NULL
 );
 
-INSERT INTO business_partners VALUES (111 , 'NETFLIX' , 1500000);
+INSERT INTO business_partners VALUES (111 , 'NETFLIX' , 1500000);        /*заполнение таблицы №6*/
 INSERT INTO business_partners VALUES (222 , 'VERSACE' , 1500000);
 INSERT INTO business_partners VALUES (333 , 'PUMA' , 1500000);
 INSERT INTO business_partners VALUES (444 , 'SPOTIFY' , 1500000);
